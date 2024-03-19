@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function(){
      if(window.location.pathname==="/addUser.html"){
     btn.addEventListener("click",getForm) 
   }
+  }
 });
 
 
