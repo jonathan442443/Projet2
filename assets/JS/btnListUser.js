@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded",function(){
+    //Ceci me permet de supprimer la div "lightBox" d'exemple une fois que j'ai un etudiant ajoute
+    if(!localStorage.length==0){
+      let cardExample=document.querySelector(".lightBox");
+      cardExample.remove() ;
+    }
     let keys = Object.keys(localStorage);
     keys.sort();
     keys.forEach((el)=>{
@@ -34,6 +39,8 @@ document.addEventListener("DOMContentLoaded",function(){
        let btnInfo=document.querySelectorAll(".btn-info");
        let btnClose=document.querySelectorAll(".btn-secondary");
        let btnDelete=document.querySelectorAll(".btn-danger");
+
+       //C'est la facon dont je me sers pour recuperer toutes lignes du tableau afin d'etre en capacite de les supprimer.
        let tr=document.querySelectorAll("tr");
        let arrTr=Array.from(tr);
        arrTr.splice(0,1)
@@ -43,7 +50,7 @@ document.addEventListener("DOMContentLoaded",function(){
         btnInfo.forEach((element,i) => {
            element.addEventListener("click",function(){
              card[i].style.display="flex"
-             console.log(i); 
+             
             })
            });
         btnClose.forEach((element,i) => {
@@ -52,6 +59,8 @@ document.addEventListener("DOMContentLoaded",function(){
             })
             
            });
+
+
            btnDelete[0].addEventListener("click",function(){
             let q=confirm("Voulez vous supprimer cet utilsateur?")
               if(q){
