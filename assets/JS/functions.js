@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(){
     sendForm() 
   }
   else{
-    if(window.location.pathname==="/addUser.html"){
+    if(window.location.pathname==="/Projet2/addUser.html"){
       btn.addEventListener("click",getForm) 
     }
   }
