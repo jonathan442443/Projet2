@@ -27,7 +27,7 @@ else{
       localStorage.setItem("student"+number,JSON.stringify(obj))
 }
 alert("La sauvegarde a bien été effectuée!");
-window.location.pathname="/listUser.html"; 
+window.location.pathname="/Projet2/listUser.html"; 
 }
 
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(){
     sendForm() 
   }
   else{
-    if(window.location.pathname==="/addUser.html"){
+    if(window.location.pathname==="/Projet2/addUser.html"){
       btn.addEventListener("click",getForm) 
     }
   }
