@@ -28,7 +28,7 @@ else{
       localStorage.setItem("student"+number,JSON.stringify(obj))
 }
 alert("La sauvegarde a bien été effectuée!");
-window.location.pathname="/Projet2/listUser.html"; 
+window.location.href="https://jonathan442443.github.io/Projet2/listUser.html"; 
 }
 
 
