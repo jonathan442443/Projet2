@@ -13,18 +13,17 @@ function getForm(){
     name:name,
     cours:cours,
     tz:tz,
-    date:date
+    date:date,
+    id:localStorage.length
   }
 
 if(localStorage.length==0){
       number=1;
-      obj.id=number;
-      localStorage.setItem("student"+number,JSON.stringify(obj))
+       localStorage.setItem("student"+number,JSON.stringify(obj))
 }
 else{
       number=localStorage.length
       number++
-      obj.id=number;
       localStorage.setItem("student"+number,JSON.stringify(obj))
 }
 alert("La sauvegarde a bien été effectuée!");
@@ -34,6 +33,11 @@ window.location.pathname="/listUser.html";
 
 
 function sendForm(){
+  //Ce if me permet de supprimer la ligne de tableau d'exemple qu'une fois qu'un etudiant a ete ajoute.
+if(!localStorage.length==0){
+  tab.innerHTML="";
+}
+
 let keys = Object.keys(localStorage);
 keys.sort();
 keys.forEach((key,i)=>{
@@ -41,7 +45,7 @@ keys.forEach((key,i)=>{
   let valeur=JSON.parse(cle);
   let arr=`
   <tr>
-  <th scope="row">3</th>
+  <th scope="row">${i}</th>
   <td>${valeur.cours} </td>
   <td>${valeur.name}</td>
   <td>${valeur.tz}</td>
@@ -61,13 +65,12 @@ document.addEventListener('DOMContentLoaded', function(){
     sendForm() 
   }
   else{
-     if(window.location.pathname==="/addUser.html"){
-    btn.addEventListener("click",getForm) 
-       console.log("code actif")
+    if(window.location.pathname==="/addUser.html"){
+      btn.addEventListener("click",getForm) 
+    }
   }
-  }
+  
 });
-
 
 
 
