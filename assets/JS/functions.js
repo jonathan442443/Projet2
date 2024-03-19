@@ -61,7 +61,7 @@ tab.innerHTML+=arr;
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/listUser.html"){
+  if(window.location.pathname==="/Projet2/listUser.html"){
     sendForm() 
   }
   else{
