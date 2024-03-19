@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function(){
   else{
      if(window.location.pathname==="/Projet2/addUser.html"){
     btn.addEventListener("click",getForm) 
+       console.log("code actif")
   }
   }
 });
