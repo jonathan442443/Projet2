@@ -60,12 +60,12 @@ document.addEventListener('DOMContentLoaded', function(){
   if(window.location.pathname==="/listUser.html"){
     sendForm() 
   }
-});
-document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/addUser.html"){
+  else{
+     if(window.location.pathname==="/addUser.html"){
     btn.addEventListener("click",getForm) 
   }
 });
+
 
 
 
