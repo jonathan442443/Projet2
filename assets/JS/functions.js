@@ -28,7 +28,7 @@ else{
       localStorage.setItem("student"+number,JSON.stringify(obj))
 }
 alert("La sauvegarde a bien été effectuée!");
-window.location.href="https://jonathan442443.github.io/Projet2/listUser.html"; 
+window.location.pathname="/listUser.html"; 
 }
 
 
@@ -57,11 +57,11 @@ tab.innerHTML+=arr;
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/Projet2/listUser.html"){
+  if(window.location.pathname==="/listUser.html"){
     sendForm() 
   }
   else{
-     if(window.location.pathname==="/Projet2/addUser.html"){
+     if(window.location.pathname==="/addUser.html"){
     btn.addEventListener("click",getForm) 
        console.log("code actif")
   }
