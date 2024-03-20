@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded",function(){
                 <h5 class="card-title mt-4 mb-0">Carte etudiant</h5>
                 <p class="card-text mb-2 font-weight-bold">Formation: ${valeur.cours} </p>
                 <p class="card-text mb-0 font-weight-bold">${valeur.name}</p>
-                <p class="card-text m-0">ID: ${valeur.tz}</p>
+                <p class="card-text m-0">ID: ${valeur.id}</p>
                 <p class="card-text"><small class="text-muted">Valable ${valeur.date}</small></p>
               </div>
             </div>
