@@ -2,7 +2,7 @@ let btn=document.getElementById("sendForm");
 
 let getKeys=_=>{
   let keys = Object.keys(localStorage);
-  keys.sort();
+  keys.sort(); 
   return keys
 }
 
