@@ -1,11 +1,37 @@
 document.addEventListener("DOMContentLoaded",function(){
-    //Ceci me permet de supprimer la div "lightBox" d'exemple une fois que j'ai un etudiant ajoute
+
+console.log(keys)
+   
+
+  function sendForm(){
+    let tab=document.getElementById("usersTable");
     if(!localStorage.length==0){
-      let cardExample=document.querySelector(".lightBox");
-      cardExample.remove() ;
-    }
-    let keys = Object.keys(localStorage);
-    keys.sort();
+      tab.innerHTML="";
+    }  
+    
+    keys.forEach((key,i)=>{
+      let cle=localStorage.getItem(key);
+      let valeur=JSON.parse(cle);
+      let arr=`
+      <tr>
+      <th scope="row">${valeur.id} </th>
+      <td>${valeur.cours} </td>
+      <td>${valeur.name}</td>
+      <td>${valeur.tz}</td>
+      <td>${valeur.date}</td>
+      <td><button type="button" class="btn btn-info"> Creation de carte</button></td>
+      <td><button type="button" class="btn btn-danger">X</button></td>
+    </tr>`;
+    tab.innerHTML+=arr;
+    
+    
+    })
+    
+    };
+    sendForm()
+
+
+   
     keys.forEach((el)=>{
         
         let cle=localStorage.getItem(el);
@@ -34,23 +60,27 @@ document.addEventListener("DOMContentLoaded",function(){
   
        `
        document.body.appendChild(carte)});
-
-       let card=document.querySelectorAll(".lightBox");
+  
+      let card=document.querySelectorAll(".lightBox");
        let btnInfo=document.querySelectorAll(".btn-info");
        let btnClose=document.querySelectorAll(".btn-secondary");
        let btnDelete=document.querySelectorAll(".btn-danger");
-
-       //C'est la facon dont je me sers pour recuperer toutes lignes du tableau afin d'etre en capacite de les supprimer.
        let tr=document.querySelectorAll("tr");
        let arrTr=Array.from(tr);
        arrTr.splice(0,1)
-       console.log(arrTr)
+       
 
 
         btnInfo.forEach((element,i) => {
            element.addEventListener("click",function(){
-             card[i].style.display="flex"
-             
+            if(localStorage.length==0){
+           card[i].style.display="flex"
+            }
+            else{ 
+              i++
+              card[i].style.display="flex"
+              console.log(i); }
+          
             })
            });
         btnClose.forEach((element,i) => {
@@ -59,27 +89,28 @@ document.addEventListener("DOMContentLoaded",function(){
             })
             
            });
-
-
-           btnDelete[0].addEventListener("click",function(){
-            let q=confirm("Voulez vous supprimer cet utilsateur?")
-              if(q){
-              arrTr[0].parentNode.removeChild(arrTr[0]);
-            }
-    
-            })
+          
 
         btnDelete.forEach((element,i) => {
-          if(!i==0){
+          if(localStorage.length==0){
+            element.addEventListener("click",function(){
+              let q=confirm("Voulez vous supprimer cet utilisateur?")
+              if(q){ 
+              arrTr[i].parentNode.removeChild(arrTr[i]);
+            }
+            
+            })
+          }
+          else{
           element.addEventListener("click",function(){
             let q=confirm("Voulez vous supprimer cet utilisateur?")
             if(q){ 
             arrTr[i].parentNode.removeChild(arrTr[i]);
-            i--;
             localStorage.removeItem(keys[i])
           }
           
-          })}
+          })
+        }
           
         });
 
