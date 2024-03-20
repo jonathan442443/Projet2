@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/addUser.html"){
+  if(window.location.pathname==="/Projet2/addUser.html"){
 
     let btn=document.getElementById("sendForm");
 
