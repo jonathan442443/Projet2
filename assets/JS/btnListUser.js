@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded",function(){
 
-console.log(keys)
+  let getKeys=_=>{
+    let keys = Object.keys(localStorage);
+    keys.sort();
+    return keys
+  }
+
+  let keys=getKeys()
    
 
   function sendForm(){
