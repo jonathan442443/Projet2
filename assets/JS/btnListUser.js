@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",function(){
-
+  //Fonction permettant de recuperer les cles du localStorage dans un tableau et les ordonnant dans leur ordre d'ajout
   let getKeys=_=>{
     let keys = Object.keys(localStorage);
     keys.sort();
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
   let keys=getKeys()
    
-
+//Fonction permettant d'ajouter au html (donc au visuel) les students ajoutes depuis la page addUser.html
   function sendForm(){
     let tab=document.getElementById("usersTable");
     if(!localStorage.length==0){
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
    
-    keys.forEach((el)=>{
+    keys.forEach((key)=>{
         
-        let cle=localStorage.getItem(el);
+        let cle=localStorage.getItem(key);
         let valeur=JSON.parse(cle);
         let carte=document.createElement("div");
         carte.className="lightBox"
@@ -63,14 +63,23 @@ document.addEventListener("DOMContentLoaded",function(){
         </div>
       </div>
     </div>
-  
-       `
-       document.body.appendChild(carte)});
+    `
+      document.body.appendChild(carte)});
   
       let card=document.querySelectorAll(".lightBox");
+  
+     //Ici je supprime la div "lightBox" d'exemple une fois qu'un student a ete rajoute afin qu'elle ne me derange pas dans la boucle permettant l'affichage des "vrais" carte de student
+      if(!localStorage.length==0){
+        card[0].parentNode.removeChild(card[0]);
+        card=Array.from(card);
+        card.splice(0, 1)
+       }
+  
        let btnInfo=document.querySelectorAll(".btn-info");
        let btnClose=document.querySelectorAll(".btn-secondary");
        let btnDelete=document.querySelectorAll(".btn-danger");
+  
+       //Ici j'enleve la premier colonne de mon tableau etant donne qu'elle ne doit jamais etre supprime
        let tr=document.querySelectorAll("tr");
        let arrTr=Array.from(tr);
        arrTr.splice(0,1)
@@ -79,47 +88,29 @@ document.addEventListener("DOMContentLoaded",function(){
 
         btnInfo.forEach((element,i) => {
            element.addEventListener("click",function(){
-            if(localStorage.length==0){
            card[i].style.display="flex"
-            }
-            else{ 
-              i++
-              card[i].style.display="flex"
-              console.log(i); }
-          
             })
            });
+  
         btnClose.forEach((element,i) => {
             element.addEventListener("click",function(){
-             card[i].style.display="none" 
-            })
-            
+            card[i].style.display="none" 
+            })  
            });
           
 
         btnDelete.forEach((element,i) => {
-          if(localStorage.length==0){
             element.addEventListener("click",function(){
-              let q=confirm("Voulez vous supprimer cet utilisateur?")
-              if(q){ 
-              arrTr[i].parentNode.removeChild(arrTr[i]);
-            }
-            
-            })
-          }
-          else{
-          element.addEventListener("click",function(){
             let q=confirm("Voulez vous supprimer cet utilisateur?")
             if(q){ 
             arrTr[i].parentNode.removeChild(arrTr[i]);
+            if(!localStorage.length==0){
             localStorage.removeItem(keys[i])
-          }
-          
-          })
-        }
-          
+              }
+            }
+            })   
         });
 
-        
+      
 
 });
