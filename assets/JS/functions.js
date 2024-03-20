@@ -1,8 +1,12 @@
 let btn=document.getElementById("sendForm");
-let tab=document.getElementById("usersTable");
 
-let number=1;
+let getKeys=_=>{
+  let keys = Object.keys(localStorage);
+  keys.sort();
+  return keys
+}
 
+let keys=getKeys()
 
 function getForm(){
   let name=document.getElementById("student_name").value;
@@ -13,63 +17,50 @@ function getForm(){
     name:name,
     cours:cours,
     tz:tz,
-    date:date,
-    id:localStorage.length
+    date:date
   }
 
 if(localStorage.length==0){
-      number=1;
-       localStorage.setItem("student"+number,JSON.stringify(obj))
+      
+  obj.id=1;
+  localStorage.setItem("student"+1,JSON.stringify(obj))
 }
 else{
-      number=localStorage.length
-      number++
-      localStorage.setItem("student"+number,JSON.stringify(obj))
+  if(localStorage.length==1){
+ 
+  let cle=localStorage.getItem(keys[0]) 
+  let valeur=JSON.parse(cle)
+  let id=valeur.id
+  id++
+  obj.id=id;
+  localStorage.setItem("student"+id,JSON.stringify(obj))
+
 }
+else{
+  keys.forEach((key,i)=>{
+   if(i==keys.length-1){
+     let cle=localStorage.getItem(key);
+     let valeur=JSON.parse(cle);
+     let id=valeur.id;
+     id++
+     obj.id=id;
+     localStorage.setItem("student"+id,JSON.stringify(obj))
+ 
+   }
+   
+  })
+}}
+
+
 alert("La sauvegarde a bien été effectuée!");
-window.location.pathname="/Projet2/listUser.html"; 
+window.location.pathname="/listUser.html"; 
 }
 
-
-
-function sendForm(){
-  //Ce if me permet de supprimer la ligne de tableau d'exemple qu'une fois qu'un etudiant a ete ajoute.
-if(!localStorage.length==0){
-  tab.innerHTML="";
-}
-
-let keys = Object.keys(localStorage);
-keys.sort();
-keys.forEach((key,i)=>{
-  let cle=localStorage.getItem(key);
-  let valeur=JSON.parse(cle);
-  let arr=`
-  <tr>
-  <th scope="row">${i}</th>
-  <td>${valeur.cours} </td>
-  <td>${valeur.name}</td>
-  <td>${valeur.tz}</td>
-  <td>${valeur.date}</td>
-  <td><button type="button" class="btn btn-info"> Creation de carte</button></td>
-  <td><button type="button" class="btn btn-danger">X</button></td>
-</tr>`;
-tab.innerHTML+=arr;
-
-
-})
-
-};
 
 document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/Projet2/listUser.html"){
-    sendForm() 
+  if(window.location.pathname==="/addUser.html"){
+    btn.addEventListener("click",getForm) 
   }
-  else{
-    if(window.location.pathname==="/Projet2/addUser.html"){
-      btn.addEventListener("click",getForm) 
-    }
-  }
-  
 });
 
 
