@@ -2,7 +2,7 @@
 
     let btn=document.getElementById("sendForm");
     //Fonction permettant de recuperer les cles du loalstorage dans un tableau
-    let getKeys=_=>{
+    let getKeys=_=>{ 
       let keys = Object.keys(localStorage);
       keys.sort();
       return keys
