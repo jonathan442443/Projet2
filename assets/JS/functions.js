@@ -1,7 +1,7 @@
 
 
     let btn=document.getElementById("sendForm");
-
+    //Fonction permettant de recuperer les cles du loalstorage dans un tableau
     let getKeys=_=>{
       let keys = Object.keys(localStorage);
       keys.sort();
@@ -9,7 +9,7 @@
     }
 
     let keys=getKeys()
-
+    //Fonction permettant d'ajouter un nouvel objet dans le local storage avec les donnes d'utilsateur ajoute
     function getForm(){
       let name=document.getElementById("student_name").value;
       let cours=document.getElementById("student_cours").value;
@@ -21,10 +21,11 @@
         tz:tz,
         date:date
       }
-
+    //A ce niveau je fais en sorte d'etre sur de ne pas nommer de la meme facon 2 utilisateur (ce qui ecraserait le premier) 
+    //ainsi que leur donner un id qui soit forcement superieur au dernier ajoute    
     if(localStorage.length==0){
           
-      obj.id=1;
+      obj.id=0;
       localStorage.setItem("student"+1,JSON.stringify(obj))
     }
     else{
@@ -35,6 +36,7 @@
       let id=valeur.id
       id++
       obj.id=id;
+      id++
       localStorage.setItem("student"+id,JSON.stringify(obj))
 
     }
@@ -46,6 +48,7 @@
         let id=valeur.id;
         id++
         obj.id=id;
+        id++
         localStorage.setItem("student"+id,JSON.stringify(obj))
     
       }
