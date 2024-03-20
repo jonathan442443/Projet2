@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-  if(window.location.pathname==="/addUser.html"){
+  
 
     let btn=document.getElementById("sendForm");
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     btn.addEventListener("click",getForm) 
   }
-});
+);
 
 
 
