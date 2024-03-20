@@ -8,9 +8,11 @@ document.addEventListener("DOMContentLoaded",function(){
 
   let keys=getKeys()
    
-//Fonction permettant d'ajouter au html (donc au visuel) les students ajoutes depuis la page addUser.html
+//Fonction permettant d'ajouter au html (donc au visuel) les students ajoutes depuis la page addUser.html ainsi que leurs cartes respectives grace a la creation de "lightBox" personnalise
   function sendForm(){
     let tab=document.getElementById("usersTable");
+
+    //Je supprime la ligne d'exemple une fois que des students sont ajoutes
     if(!localStorage.length==0){
       tab.innerHTML="";
     }  
@@ -29,6 +31,30 @@ document.addEventListener("DOMContentLoaded",function(){
       <td><button type="button" class="btn btn-danger">X</button></td>
     </tr>`;
     tab.innerHTML+=arr;
+
+     let carte=document.createElement("div");
+        carte.className="lightBox"
+        carte.innerHTML=`
+       
+        <button type="button" class="btn btn-secondary">fermer</button>
+        <div class="card mb-3 card_webschool">
+          <div class="row no-gutters">
+            <div class="col-md-4 align-self-center">
+              <img src="assets/images/WebschoolLogo-PNG300.png" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title mt-4 mb-0">Carte etudiant</h5>
+                <p class="card-text mb-2 font-weight-bold">Formation: ${valeur.cours} </p>
+                <p class="card-text mb-0 font-weight-bold">${valeur.name}</p>
+                <p class="card-text m-0">ID: ${valeur.tz}</p>
+                <p class="card-text"><small class="text-muted">Valable ${valeur.date}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    `
+      document.body.appendChild(carte) 
     
     
     })
@@ -38,33 +64,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
    
-    keys.forEach((key)=>{
-        
-        let cle=localStorage.getItem(key);
-        let valeur=JSON.parse(cle);
-        let carte=document.createElement("div");
-        carte.className="lightBox"
-        carte.innerHTML=`
-       
-    <button type="button" class="btn btn-secondary">fermer</button>
-    <div class="card mb-3 card_webschool">
-      <div class="row no-gutters">
-        <div class="col-md-4 align-self-center">
-          <img src="assets/images/WebschoolLogo-PNG300.png" class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title mt-4 mb-0">Carte etudiant</h5>
-            <p class="card-text mb-2 font-weight-bold">Formation: ${valeur.cours} </p>
-            <p class="card-text mb-0 font-weight-bold">${valeur.name}</p>
-            <p class="card-text m-0">ID: ${valeur.tz}</p>
-            <p class="card-text"><small class="text-muted">Valable ${valeur.date}</small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    `
-      document.body.appendChild(carte)});
+   
   
       let card=document.querySelectorAll(".lightBox");
   
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded",function(){
        let btnClose=document.querySelectorAll(".btn-secondary");
        let btnDelete=document.querySelectorAll(".btn-danger");
   
-       //Ici j'enleve la premier colonne de mon tableau etant donne qu'elle ne doit jamais etre supprime
+       //Ici j'enleve la premiere ligne de mon tableau etant donne qu'elle ne doit jamais etre supprime
        let tr=document.querySelectorAll("tr");
        let arrTr=Array.from(tr);
        arrTr.splice(0,1)
