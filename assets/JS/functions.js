@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-  
+  if(window.location.pathname==="/addUser.html"){
 
     let btn=document.getElementById("sendForm");
 
@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     alert("La sauvegarde a bien été effectuée!");
-    window.location.pathname="/listUser.html"; 
+    window.location.pathname="/Projet2/listUser.html"; 
     }
 
 
 
     btn.addEventListener("click",getForm) 
   }
-);
+});
 
 
 
